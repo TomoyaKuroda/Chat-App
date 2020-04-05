@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import { messageRouter } from "./routes/messages";
 import { middlewareAuth } from "./middleware/auth";
 import { authRouter } from "./routes/auth";
+import { meRouter } from "./routes/me";
 
 const PORT = 9999;
 
@@ -26,6 +27,8 @@ const run = async () => {
   app.use(cors());
   app.use("/auth", authRouter);
   app.use(`/users`, middlewareAuth, usersRouter);
+  app.use(`/me`, middlewareAuth, meRouter);
+
   app.use("/conversations", middlewareAuth, conversationRouter);
   app.use("/messages", middlewareAuth, messageRouter);
 

@@ -48,33 +48,33 @@ export const ConversationPage = () => {
         // If creating new convo, display form
         <CreateConversation />
       ) : (
-        // Otherwise display conversation as normal
-        <>
-          <header>
-            {conversation ? (
-              <>Conversation {conversation.name}</>
-            ) : (
-              <h1>Could not find conversation</h1>
-            )}
-          </header>
-          <ul className="messages">
-            {messages.map((m) => (
-              <li>
-                <span>{m.content}</span>
-              </li>
-            ))}
-          </ul>
+          // Otherwise display conversation as normal
+          <>
+            <header>
+              {conversation ? (
+                <>Conversation {conversation.name}</>
+              ) : (
+                  <h1>Could not find conversation</h1>
+                )}
+            </header>
+            <ul className="messages">
+              {messages.map((m) => (
+                <li>
+                  <span>{m.content}</span>
+                </li>
+              ))}
+            </ul>
 
-          <footer>
-            <SendMessage
-              conversationId={params.conversationID}
-              onNewMessage={(message) => {
-                updateMessages((m) => [...m, message]);
-              }}
-            />
-          </footer>
-        </>
-      )}
+            <footer>
+              <SendMessage
+                conversationId={params.conversationID}
+                onNewMessage={(message) => {
+                  updateMessages((m) => [...m, message]);
+                }}
+              />
+            </footer>
+          </>
+        )}
     </main>
   );
 };

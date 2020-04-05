@@ -18,7 +18,7 @@ conversationRouter.get("/:conversationID", async (req, res) => {
   res.json(conversation);
 });
 // new message
-conversationRouter.get("/:conversationID/message", async (req, res, _next) => {
+conversationRouter.get("/:conversationID/messages", async (req, res, _next) => {
   const { conversationID } = req.params;
   const conversion = await Conversation.findByPk(conversationID);
   const messages = await conversion?.$get("messages");
@@ -41,7 +41,7 @@ conversationRouter.put("/:conversationID", async (req, res, next) => {
   try {
     await Conversation.update(req.body, {
       where: { id: req.params.conversationID },
-      returning: true
+      returning: true,
     });
     const conversation = await Conversation.findByPk(req.params.conversationID);
     res.json(conversation);
@@ -55,10 +55,10 @@ conversationRouter.put("/:conversationID", async (req, res, next) => {
 conversationRouter.delete("/:conversationID", (req, res, next) => {
   try {
     Conversation.destroy({
-      where: { id: req.params.conversationID }
+      where: { id: req.params.conversationID },
     });
     res.json({
-      message: "Successfully delete conversation"
+      message: "Successfully delete conversation",
     });
   } catch (e) {
     next(e);

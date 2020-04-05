@@ -10,7 +10,7 @@ export const Sidebar = () => {
   const [conversation, updateConversation] = useState<Conversation[]>([]);
   useEffect(() => {
     (async function loadInitialData() {
-      const allConversation = await api.getAllConversation();
+      const allConversation = await api.getConversations();
       updateConversation(allConversation);
     })();
   }, [params.conversationID]);

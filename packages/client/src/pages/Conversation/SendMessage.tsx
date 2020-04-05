@@ -13,7 +13,7 @@ export const SendMessage: React.FC<SendMessagePages> = ({
   const input = useRef<HTMLInputElement>(null);
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const message = await api.createMessages(
+    const message = await api.createMessage(
       conversationId,
       input.current?.value!
     );

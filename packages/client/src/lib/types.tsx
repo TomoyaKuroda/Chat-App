@@ -8,3 +8,14 @@ export interface Message {
   content: string;
   id: string;
 }
+
+export interface Params {
+  conversationID: string;
+}
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
