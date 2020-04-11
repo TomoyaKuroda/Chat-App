@@ -1,16 +1,16 @@
-import "./styles/base.scss";
-import React from "react";
-import ReactDOM from "react-dom";
-import { AppRouter } from "./Router/Router";
-import "./lib/API";
-import { ConversationPage } from "./pages/Conversation/Conversation.page";
-(async () => {
+import './styles/base.scss';
+import './lib/API';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppRouter } from './Router/Router';
+import { Conversations } from './containers/conversations.container';
+
+(async () =>
   ReactDOM.render(
-    <ConversationPage.Provider>
-
+    <Conversations.Provider>
       <AppRouter />
-    </ConversationPage.Provider>
-    ,
-
-    document.getElementById("app"));
-})();
+    </Conversations.Provider>,
+    document.getElementById('app')
+  )
+)();

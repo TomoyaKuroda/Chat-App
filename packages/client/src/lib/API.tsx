@@ -1,11 +1,23 @@
-import axios from "axios";
-import { ME, setMe, getMe } from '../config';
+import axios from 'axios';
+import { setMe, getMe } from '../config';
+
 class API {
-  prefix = "http://localhost:9999";
+  prefix = '%%API_URL%%'; // Replaced in webpack depending on the NODE_ENV
+
   async login(email: string, password: string) {
-    return this.request("post", "/auth/login", {
-      email,
-      password,
+    return this.request('post', '/auth/login', {
+      email, password
+    });
+  }
+
+  async signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    return this.request('post', '/auth/signup', {
+      firstName, lastName, email, password
     });
   }
 
@@ -13,42 +25,55 @@ class API {
     const me = await this.request('get', '/me');
     setMe(me);
     return me;
-
   }
 
   async getConversations() {
-    return this.request("get", "/conversations");
+    return this.request('get', '/conversations');
   }
+
   async getConversation(id: string) {
-    return this.request("get", `/conversations/${id}`);
+    return this.request('get', `/conversations/${id}`);
   }
+
   async createConversation(name: string) {
-    return this.request("post", "/conversations", { name });
+    return this.request('post', '/conversations', { name });
   }
+
   async getMessages(id: string) {
-    return this.request("get", `/conversations/${id}/messages`);
+    return this.request('get', `/conversations/${id}/messages`);
   }
-  async createMessage(conversationId: string, content: string) {
-    return this.request("post", "/messages", {
-      userId: getMe().id,
+
+  async createMessage(
+    conversationId: string,
+    content: string
+  ) {
+    return this.request('post', '/messages', {
+      userId: getMe()!.id,
       content,
-      conversationId,
+      conversationId
     });
   }
-  private async request(type: "get" | "post", url: string, data?: object) {
+
+
+  private async request(
+    type: 'get' | 'post',
+    url: string,
+    data?: object
+  ) {
     const headers = {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
+      authorization: `Bearer ${localStorage.getItem('token')}`
     };
+
     try {
       let res: any;
-      if (type === "get") {
+      if (type === 'get') {
         res = await axios.get(`${this.prefix}${url}`, {
-          headers,
+          headers
         });
       }
-      if (type === "post") {
+      if (type === 'post') {
         res = await axios.post(`${this.prefix}${url}`, data, {
-          headers,
+          headers
         });
       }
       return res!.data;

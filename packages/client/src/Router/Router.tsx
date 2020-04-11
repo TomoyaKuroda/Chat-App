@@ -5,6 +5,7 @@ import { history } from "./history";
 import { ConversationPage } from "../pages/Conversation/Conversation.page";
 import { LoginPage } from "../pages/Login/Login.page";
 import { api } from "../lib/API";
+import { SignupPage } from "../pages/Signup/Signup.page";
 
 export const AppRouter = () => {
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,8 @@ export const AppRouter = () => {
         <Route path="/" exact component={HomePage} />
         <Route path="/c/:conversationID" exact component={ConversationPage} />
         <Route path="/login" exact component={LoginPage} />
+        <Route path="/signup" exact component={SignupPage} />
+
       </Switch>
     </Router>
   );
