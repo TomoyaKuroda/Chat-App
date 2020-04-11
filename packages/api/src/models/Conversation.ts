@@ -5,8 +5,7 @@ import {
   Model,
   AllowNull,
   HasMany,
-  Default,
-  BelongsToMany
+  BelongsToMany,
 } from "sequelize-typescript";
 import { Message } from "./Message";
 import { User } from "./User";
@@ -17,7 +16,7 @@ export class Conversation extends Model<Conversation> {
   @Column({
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
-    type: DataType.UUID
+    type: DataType.UUID,
   })
   id: string;
 
@@ -28,9 +27,6 @@ export class Conversation extends Model<Conversation> {
   @HasMany(() => Message)
   messages: Message[];
 
-  @BelongsToMany(
-    () => User,
-    () => UserConversation
-  )
+  @BelongsToMany(() => User, () => UserConversation)
   users: User[];
 }
