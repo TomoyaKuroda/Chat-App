@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { User } from "../models/User";
-import bcrypt from "bcryptjs";
+const bcrypt = require("bcryptjs");
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config";
 
