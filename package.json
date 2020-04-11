@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall":"cd packages/api; yaru build"
+    "postinstall":"cd packages/api; yaru build",
     "bootstrap": "yarn; lerna bootstrap; lerna link;",
     "start-api": "cd packages/api; yarn start"
   },
