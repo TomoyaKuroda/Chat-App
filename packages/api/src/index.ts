@@ -5,10 +5,13 @@ import { usersRouter } from "./routes/users";
 import { conversationRouter } from "./routes/conversation";
 import { sequelize } from "./database";
 import bodyParser from "body-parser";
-import { messageRouter } from "./routes/messages";
+import { messagesRouter } from "./routes/messages";
 import { middlewareAuth } from "./middleware/auth";
 import { authRouter } from "./routes/auth";
 import { meRouter } from "./routes/me";
+
+import { createServer } from "http";
+import io from "socket.io";
 
 const PORT = 9999;
 
@@ -30,9 +33,9 @@ const run = async () => {
   app.use(`/me`, middlewareAuth, meRouter);
 
   app.use("/conversations", middlewareAuth, conversationRouter);
-  app.use("/messages", middlewareAuth, messageRouter);
+  app.use("/messages", middlewareAuth, messagesRouter);
 
-  app.listen(PORT);
+  http.listen(PORT);
   console.info(`API running on ${PORT}`);
 };
 
