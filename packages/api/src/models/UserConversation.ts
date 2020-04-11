@@ -1,23 +1,21 @@
 import {
-  Table,
-  DataType,
   Column,
+  DataType,
+  ForeignKey,
   Model,
-  AllowNull,
-  BelongsTo,
-  ForeignKey
+  Table,
 } from "sequelize-typescript";
 
 import { Conversation } from "./Conversation";
 import { User } from "./User";
 
-@Table({ paranoid: true })
+@Table
 export class UserConversation extends Model<UserConversation> {
   @ForeignKey(() => User)
-  @Column
+  @Column(DataType.UUID)
   userId: string;
 
   @ForeignKey(() => Conversation)
-  @Column
+  @Column(DataType.UUID)
   conversationId: string;
 }

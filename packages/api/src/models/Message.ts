@@ -1,22 +1,22 @@
 import {
-  Table,
-  DataType,
-  Column,
-  Model,
   AllowNull,
   BelongsTo,
-  ForeignKey
+  Column,
+  DataType,
+  Model,
+  Table,
+  ForeignKey,
 } from "sequelize-typescript";
 
-import { Conversation } from "./Conversation";
 import { User } from "./User";
+import { Conversation } from "./Conversation";
 
 @Table({ paranoid: true })
 export class Message extends Model<Message> {
   @Column({
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
-    type: DataType.UUID
+    type: DataType.UUID,
   })
   id: string;
 
@@ -24,15 +24,17 @@ export class Message extends Model<Message> {
   @Column
   content: string;
 
+  // This is the column of the conversation ID itself
   @AllowNull(false)
   @ForeignKey(() => User)
-  @Column
-  userId: string;
+  @Column(DataType.UUID)
+  userId: string; // Who sent the message
 
+  // This is just for Sequelize to create a one to one relationship
   @BelongsTo(() => User)
   user: User;
 
   @ForeignKey(() => Conversation)
-  @Column
+  @Column(DataType.UUID)
   conversationId: string;
 }
